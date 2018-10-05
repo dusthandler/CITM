@@ -1,4 +1,4 @@
-#include "p2Defs.h"
+﻿#include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Render.h"
@@ -44,6 +44,12 @@ iPoint j1Map::MapToWorld(int x, int y) const
 	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
 
 	// TODO 1: Add isometric map to world coordinates
+
+	//iPoint ret;
+
+	ret.x = (x - y) * (data.tile_width * 0.5f);
+	ret.y = (x + y) * (data.tile_height * 0.5f);
+
 	return ret;
 }
 
@@ -103,7 +109,7 @@ bool j1Map::Load(const char* file_name)
 	bool ret = true;
 	p2SString tmp("%s%s", folder.GetString(), file_name);
 
-	pugi::xml_parse_result result = map_file.load_file(file_name);
+	pugi::xml_parse_result result = map_file.load_file(tmp.GetString());
 
 	if(result == NULL)
 	{
