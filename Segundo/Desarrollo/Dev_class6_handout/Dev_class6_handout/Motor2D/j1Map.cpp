@@ -56,11 +56,21 @@ iPoint j1Map::MapToWorld(int x, int y) const
 
 iPoint j1Map::WorldToMap(int x, int y) const
 {
-	iPoint ret(0,0);
+	iPoint ret(0, 0);
 	// TODO 2: Add orthographic world to map coordinates
 
-	// TODO 3: Add the case for isometric maps to WorldToMap
-	return ret;
+	
+			//ret.x = x / data.tile_width;
+			//ret.y = y / data.tile_height;
+		
+
+			// TODO 3: Add the case for isometric maps to WorldToMap
+			
+
+			ret.x = (x / (data.tile_width * 0.5f)) + ret.y;
+			ret.y = (y / (data.tile_height * 0.5f)) - ret.x;
+
+			return ret;
 }
 
 SDL_Rect TileSet::GetTileRect(int id) const
