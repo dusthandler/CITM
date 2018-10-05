@@ -1,0 +1,54 @@
+/////////////////main.c
+#include <stdio.h>
+
+#include "prototipo.h"
+
+int main()
+{
+  int enMenu = 1;
+  while (enMenu == 1)
+  {
+    enMenu = menu();
+    getchar(); // Para ver anterior resultado
+  }
+  return 0;
+}
+
+/////////////////funciones.c
+#include "prototipo.h"
+
+#include "../ex1/prototipo.h"
+#include "../ex2/prototipo.h"
+#include "../ex3/prototipo.h"
+#include <stdio.h>
+
+int menu()
+{
+   // system("cls");
+   printf("\n\n");
+
+   printf("1. Programa de array\n");
+   printf("2. Programa que pide un entero y lo escribe como char\n");
+   printf("3. Programa que crea una struct\n");
+   printf("4. Salir.\n");
+   printf(">> ");
+
+   int opcion;
+   scanf("%i", &opcion);
+   switch (opcion)
+   {
+     case 1: ex1(); break;
+     case 2: ex2(); break;
+     case 3: ex3(); break;
+     case 4: return 0; 
+   }
+   return 1;
+}
+
+/////////////////prototipo.h
+#ifndef PROTOTIPO4_H
+#define PROTOTIPO4_H
+
+int menu();
+
+#endif

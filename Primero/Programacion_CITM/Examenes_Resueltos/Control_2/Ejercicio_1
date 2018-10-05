@@ -1,0 +1,35 @@
+///////////////main.c
+
+#include <stdio.h>
+#include "prototipo.h"
+
+int main() {
+	char a, b;
+	printf("Dame un caracter\n");
+	scanf_s(" %c", &a);
+	printf("Dame otro caracter\n");
+	scanf_s(" %c", &b);
+	printf("me los has dado asi:\tprimero: %c segundo: %c\n", a, b);
+	intercambio(&a, &b);
+	printf("una vez cambiados:\tprimero: %c segundo: %c\n", a, b);
+	system("pause");
+	return 0;
+}
+
+/////////////funciones.c
+
+void intercambio(char *x, char *y) {
+	char aux;
+	aux = *x;
+	*x = *y;
+	*y = aux;
+}
+
+////////////prototipo.h
+
+#ifndef _PROTOTIPO_H
+#define _PROTOTIPO_H
+
+void intercambio(char *, char *);
+
+#endif _PROTOTIPO_H

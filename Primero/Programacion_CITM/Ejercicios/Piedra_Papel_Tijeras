@@ -1,0 +1,126 @@
+///////////////////////main.c
+
+#include <stdio.h>
+#include "prototipo.h"
+
+int main() {
+	char u, m, resp, resp2;
+	int contu = 0, contm = 0;
+	do {
+		do {
+			printf("Has apostado: %c\n", u = apuestausuario());
+
+			printf("La maquina ha apostado: %c\n", m = piedrapapeltijeras());
+
+
+			comprobar(u, m, &contu, &contm); //mismo orden variables aqui y en función
+
+			if (contu < 2 && contm < 2) {
+				printf("Quieres seguir jugando? Si <s> o No <n>? \n");
+				scanf_s(" %c", &resp);
+				printf("\n");
+			}
+
+		} while (resp == 's' && contu != 2 && contm != 2);
+
+		printf("\n");
+
+		if (contu == 2) {
+			printf("Has ganado 2 rondas! \n");
+			printf("Victorias totales del usuario: %i \n", contu);
+			printf("Victorias totales de la maquina: %i \n", contm);
+		}
+
+		else if (contm == 2) {
+			printf("La maquina ha ganado 2 rondas \n");
+			printf("Victorias totales del usuario: %i \n", contu);
+			printf("Victorias totales de la maquina: %i \n", contm);
+		}
+		else {
+			printf("Victorias totales del usuario: %i \n", contu);
+			printf("Victorias totales de la maquina: %i \n", contm);
+		}
+		printf("quieres jugar otra partida? Si <s> o No <n>?\n");
+		scanf_s(" %c", &resp2);
+		contu = 0;
+		contm = 0;
+	} while (resp2 == 's');
+	system("pause");
+	return 0;
+}
+
+////////////////////////funciones.c
+
+#include <stdio.h>
+#include<time.h>
+#include "prototipo.h"
+
+char apuestausuario() {
+	char u;
+	do {
+		printf("Piedra <p>, papel <a> o tijeras <t>? ");
+		scanf_s(" %c", &u);
+	} while (u != 'p' && u != 'a' && u != 't');
+
+	return u;
+
+}
+
+char piedrapapeltijeras() {
+	int valor;
+
+	srand(time(NULL));
+	valor = rand() % 3;
+
+	switch (valor) {
+	case 0:
+		return 'p';
+		break;
+
+	case 1:
+		return 'a';
+		break;
+
+	case 2:
+		return 't';
+		break;
+	}
+
+}
+
+void comprobar(char lu, char lm, int *contu, int *contm) {
+
+	if (lu == lm) {
+		printf("Empate\n");
+	}
+
+	else if (lu == 'p' && lm == 't' || lu == 't' && lm == 'a' || lu == 'a' && lm == 'p') { //gana u
+
+		printf("Has ganado!!\n");
+
+		(*contu)++;
+	}
+
+	else { //gana m
+
+		printf("Gana la maquina\n");
+
+		(*contm)++;
+
+	}
+	printf("victorias usuario %i\n", *contu);
+	printf("victorias maquina %i\n", *contm);
+}
+
+////////////////prototipo.h
+
+#ifndef _PROTOTIPO_H
+#define _PROTOTIPO_H
+
+char apuestausuario();
+
+char piedrapapeltijeras();
+
+void comprobar(char, char, int *, int *);
+
+#endif _PROTOTIPO_H

@@ -1,0 +1,13 @@
+#include <stdio.h>
+int main() {
+	int n, result=1, cont;
+	printf("Hasta que numero quieres contar?\n");
+	scanf_s("%i", &n);
+	for (cont = 1; cont <= n; cont++) {
+		printf("%i,%i,", result,cont);
+		result = result + 3;
+	}
+	printf("\n");
+	system("pause");
+	return 0;
+}

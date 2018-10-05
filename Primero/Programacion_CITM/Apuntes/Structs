@@ -1,0 +1,151 @@
+#include<stdio.h>
+#include<string.h>
+
+
+//estructura para un solo amigo
+/*
+typedef struct {
+	char nombre[30];
+	char apellido[30];
+	char telefono[15];
+	int edad;
+}samigo;
+
+samigo amigo;
+
+int main() {
+	printf("dame el nombre ");
+	gets(amigo.nombre);
+	printf("dame el apellido ");
+	gets(amigo.apellido);
+	printf("dame el telefono ");
+	gets(amigo.telefono);
+	printf("dame la edad ");
+	scanf_s("%i", &amigo.edad);
+	printf("los datos son nombre %s apellido %s telefono %s y edad %i\n", amigo.nombre, amigo.apellido,amigo.telefono, amigo.edad);
+	system("pause");
+	return 0;
+}
+*/
+
+//estructura para 3 amigos
+/*
+typedef struct {
+	char nombre[30];
+	char apellido[30];
+	char telefono[15];
+	int edad;
+}samigo;
+
+samigo amigo[3];
+
+int main() {
+	for (int i = 0; i < 3; i++) { //bucle de lectura de datos
+		printf("dame el nombre ");
+		gets(amigo[i].nombre);
+		printf("dame el apellido ");
+		gets(amigo[i].apellido);
+		printf("dame el telefono ");
+		gets(amigo[i].telefono);
+		printf("dame la edad ");
+		scanf_s("%i", &amigo[i].edad);	
+		printf("\n");
+		while (getchar() != '\n'); //vaciar el buffer
+	
+	}
+	for (int i = 0; i < 3; i++) { // buble de escritura de datos
+		printf("Nombre %i: %s\t", i+1, amigo[i].nombre);
+		printf("Apellido %i: %s\t", i+1, amigo[i].apellido);
+		printf("Telefono %i: %s\t", i+1, amigo[i].telefono);
+		printf("Edad %i: %i\t", i+1, amigo[i].edad);
+		printf("\n");
+	}
+	system("pause");
+	return 0;
+}
+*/
+
+//estructura para 1 amigo predefinido
+/*
+typedef struct {
+	char nombre[30];
+	char apellido[30];
+	char telefono[15];
+	int edad;
+}samigo;
+
+samigo amigo = { //definir e inicializar una estructura
+	"aaaa",
+	"bbbb",
+	"12345",
+	11
+};
+	int main() {
+
+	printf("los datos son nombre %s apellido %s telefono %s y edad %i\n", amigo.nombre, amigo.apellido,amigo.telefono, amigo.edad);
+	system("pause");
+	return 0;
+
+}
+*/
+
+//estructura para ilimitados amigos predefinidos
+/*
+typedef struct {
+	char nombre[30];
+	char apellido[30];
+	char telefono[15];
+	int edad;
+}samigo;
+
+samigo amigo[] = {
+	"aaa","bbb","111",12,
+	"aaa","ccc","123",15,
+	"vvv","hhh","432",30
+};
+int main() {
+	for (int i = 0; i < 3; i++) { // buble de escritura de datos
+		printf("Nombre %i: %s\t", i + 1, amigo[i].nombre);
+		printf("Apellido %i: %s\t", i + 1, amigo[i].apellido);
+		printf("Telefono %i: %s\t", i + 1, amigo[i].telefono);
+		printf("Edad %i: %i\t", i + 1, amigo[i].edad);
+		printf("\n");
+	}
+	system("pause");
+	return 0;
+}
+*/
+
+//operador flecha
+/*
+typedef struct {
+	char nombre[30];
+	char apellido[30];
+	char telefono[15];
+	int edad;
+}samigo;
+
+samigo amigo[] = {
+	"aaa","bbb","111",12,
+	"aaa","ccc","123",15,
+	"vvv","hhh","432",30
+};
+
+int main() {
+	samigo *p_amigo;
+
+	p_amigo = amigo; //apunta al primer elemento del array
+
+	for (int i = 0; i < 3; i++) {
+		printf("Nombre %i: %s\t", i + 1, p_amigo->nombre);
+		printf("Apellido %i: %s\t", i + 1, p_amigo->apellido);
+		printf("Telefono %i: %s\t", i + 1, p_amigo->telefono);
+		printf("Edad %i: %i\t", i + 1, p_amigo->edad);
+
+		*p_amigo++; //avanzamos de elemento
+		printf("\n");
+	}
+	system("pause");
+	return 0;
+}
+*/

@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+
+	char palabra[100];
+	int cont = 0;
+	printf("Dame una frase\n");
+	gets(palabra);
+	for (int i = 0; i < strlen(palabra); i++) {
+		if ((palabra[i] == 'l' || palabra[i] == 'L') && (palabra[i + 1] == 'a' || palabra[i + 1] == 'A')) {
+				cont++;
+		}
+	}
+	printf("La frase es %s\n", palabra);
+	printf("Hay %i apariciones de la, LA, La, lA\n", cont);
+	system("pause");
+	return 0;
+}

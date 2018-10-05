@@ -1,0 +1,49 @@
+/*El paso de parámetros por referencia implica el uso de los operadores de dirección (&) y
+puntero ( * ) de C:
+          • &, Que antepuesto a una variable permite obtener la dirección de memoria en que se
+          halla ubicada.
+          Se usara en los parámetros reales de la llamada a una función para pasarle por
+          referencia dicha variable. En otras palabras, el parámetro que se pasa a la función es
+          un puntero a una variable.
+          Ya hemos utilizado esto anteriormente en las llamadas a la función scanf_s, donde las
+          variables en que se almacenan los valores leídos del teclado se pasan por referencia.*/
+          
+         /* • *, Que se utiliza tanto en la declaración de los parámetros formales de la función como
+          en el cuerpo de la misma. Aparecerá precediendo al nombre de un parámetro formal
+          en la cabecera para indicar que dicho parámetro será pasado por referencia (será un
+          puntero). Aparecerá en el cuerpo de la función, antepuesto al nombre de un
+          parámetro formal, para acceder al valor de la variable externa a la función y
+          referenciada por el parámetro formal.*/
+          
+//prototipo.h 
+
+#ifndef _PROTOTIPO_H
+#define _PROTOTIPO_H
+
+void cambiar(int *, int *);
+
+#endif _PROTOTIPO_H
+
+          
+//funciones.c
+   
+#include <stdio.h>
+#include <stdlib.h>
+
+void cambiar(int *x, int *y){   //Parámetros formales se usan por referencia *
+int aux;
+aux=*x;  //Se usa el * para referenciar el valor del parámetro real
+*x=*y;
+*y=aux;
+}
+
+//main.c
+
+int main(){
+int a=5, b=10;
+printf(" a: %d b: %d\n",a,b);
+cambiar(&a,&b);
+printf(" a: %d b: %d\n",a,b);
+system("pause");
+return 0;
+}

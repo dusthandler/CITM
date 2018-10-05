@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<time.h>
+int main() {
+	int partidas, n, x, cont, random,user=0,bot=0;
+	srand(time(NULL));
+	printf("Cuantas partidas quieres jugar?\t");
+	scanf_s("%i", &partidas);
+	for (cont = 1; cont <= partidas; cont++) {
+		random = ((rand() % 2));
+		printf("cara (0) o cruz (1)\t");
+		scanf_s("%i", &n);
+		if (n == 1) {
+			x = 0;
+		}
+		else if (n == 0) {
+			x = 1;
+		}
+		printf("apuestas por %i, la maquina apuesta por %i\n", n, x);
+		if (random == 0) {
+			printf("ha salido cara\n");
+		}
+		else if (random == 1) {
+			printf("ha salido cruz\n");
+		}
+		if (random == n) {
+			printf("has ganado\n");
+			user++;
+		}
+		else {
+			printf("gana la maquina\n");
+			bot++;
+		}
+		
+	}
+	
+	system("pause");
+	return 0;
+}

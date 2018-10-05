@@ -1,0 +1,27 @@
+#include<stdio.h>
+int main() {
+	int grados;
+	printf("dame una temperatura: ");
+	scanf_s("%i", &grados);
+	if (grados < 0) {
+		printf("%i es una temperatura de clima helado", grados);
+	}
+	else if (grados >= 0 && grados < 10) {
+		printf("%i es una temperatura muy fria", grados);
+	}
+	else if (grados >= 10 && grados < 20) {
+		printf("%i es una temperatura de clima frio", grados);
+	}
+	else if (grados >= 20 && grados < 30) {
+		printf("%i es normal en temperatura", grados);
+	}
+	else if (grados >= 30 && grados < 40) {
+		printf("%i es una temperatura caliente", grados);
+	}
+	else if (grados > 40) {
+		printf("%i es una temperatura muy caliente", grados);
+	}
+	printf("\n");
+	system("pause");
+	return 0;
+}

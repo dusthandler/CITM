@@ -1,0 +1,108 @@
+//LETRA INICIAL PALABRAS FRASE
+
+ //main.c
+ 
+ #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "project.h"
+
+
+int main() {
+
+	char frase[100];
+
+
+	cuentala(frase);
+
+		
+	system("pause");
+	return 0;
+}
+
+
+
+//funciones.c
+
+#include <stdio.h>
+#include <string.h>
+#include "project.h"
+
+
+
+void cuentala(char frase[100]){
+	
+	printf("Escribe una frase\n");
+	gets(frase);
+
+	for (int i = 0; i < strlen(frase); i++) {
+		if (i == 0) {
+			printf("Letras principales de cada palabra:\n\n %c  ", frase[i]);
+		}
+		else if (frase[i]==' ') {
+			printf("%c  ", frase[i+1]);
+		}
+		
+		}
+	printf("\n");
+	}
+	
+//project.h
+#ifndef _PROJECT_H
+#define _PROJECT_H
+
+void cuentala(char[]);
+
+#endif
+
+
+//SILABA LA
+
+//main.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "project.h"
+
+
+int main() {
+
+	int opcion, seguir;
+	char frase[100];
+
+
+	cuentala(frase);
+
+		
+	system("pause");
+	return 0;
+}
+
+//funciones.c
+#include <stdio.h>
+#include <string.h>
+#include "project.h"
+
+
+
+void cuentala(char frase[100]){
+	int contla=0;
+	printf("Escribe una frase\n");
+	gets(frase);
+
+	for (int i = 0; i < strlen(frase); i++) {
+		if ((frase[i] == 'l' || frase[i] == 'L') && (frase[i+1] == 'a' || frase[i+1] == 'A')) {
+			contla++;
+		}
+	}
+	printf("Hay %i la en tu frase: %s\n", contla, frase);
+}
+
+//project.h
+
+#ifndef _PROJECT_H
+#define _PROJECT_H
+
+void cuentala(char[]);
+
+#endif

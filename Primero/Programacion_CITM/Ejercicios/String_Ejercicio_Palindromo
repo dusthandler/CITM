@@ -1,0 +1,74 @@
+//main.c
+
+      #include <stdio.h>
+      #include <string.h>
+      #include "header.h"
+
+      int main() {
+
+        char palabra[20];
+
+        printf("Dame una palabra\n");
+        gets(palabra);
+
+        printf("La palabra dada es: %s\n", palabra);
+
+        reves(palabra);
+
+        system("pause");
+        return 0;
+      }
+      
+      
+//funciones.c
+
+        #include <stdio.h>
+        #include <string.h>
+        #include "header.h"
+
+        void reves(char palabra[]){
+
+          int contreves=strlen(palabra);
+          char palabra2[20];
+
+
+          for (int i = 0; i < strlen(palabra); i++) {
+            contreves--;
+            palabra2[contreves] = palabra[i];
+
+           }
+          for (int j = 0; j <= strlen(palabra); j++) {
+            if (j == strlen(palabra)) {
+              palabra2[j] = '\0';
+            }
+          }
+
+          printf("La palabra al reves es: es: %s\n", palabra2);
+          //printf("La palabra  era: %s\n", palabra);
+
+          int palin=0;
+          for (int j = 0; j < strlen(palabra); j++) {
+            if (palabra[j] == palabra2[j]) {
+              palin = 1;
+            }
+          }
+
+          if (palin == 1) {
+            printf("SI palindroma\n");
+          }
+
+          else {
+            printf("NO palindroma\n");
+          }
+
+        }
+        
+        
+//header.h
+
+        #ifndef HEADER_H
+        #define HEADER_H
+        
+        void reves(char palabra[]);
+
+        #endif

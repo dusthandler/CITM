@@ -1,0 +1,63 @@
+//////////////prototipo.h
+
+#ifndef _PROTOTIPO_H
+#define _PROTOTIPO_H
+
+typedef struct {
+	char* name[20];
+	char* position;
+	int number;
+}Player;
+
+typedef struct {
+	char* name;
+	int numPlayers;
+	Player lineup[10];
+}Team;
+
+void printTeam (Team*);
+void printPlayer (Player*);
+
+#endif
+
+///////////////main.c
+
+#include <stdio.h>
+#include "prototipo.h"
+
+int main() {
+
+	Player p1 = { "Peter Pan", "Goalkeeper", 1 };
+	Player p2 = { "John Cena", "Defense", 4 };
+	Player p3 = { "Charles Darwin", "Forward", 10 };
+
+	Team* t;
+	t = new Team;
+	t->name = "La vila del pingui";
+	t->numPlayers = 3;
+	t->lineup[0] = p1;
+	t->lineup[1] = p2;
+	t->lineup[2] = p3;
+
+	printTeam(t);
+
+	delete t;
+
+	system("pause");
+	return 0;
+}
+
+///////////////funciones.c
+
+#include <stdio.h>
+#include "prototipo.h"
+
+void printTeam(Team* t) {
+	for (int i = 0; i < t->numPlayers; i++)
+		printPlayer(&(t->lineup[i]));
+		//printf("s", t->lineup[i].name)); //otra posible solucion
+}
+
+void printPlayer(Player* p) {
+	printf("Player (name, position and id): [%s] [%s] [%d]\n", p->name, p->position, p->number);
+}

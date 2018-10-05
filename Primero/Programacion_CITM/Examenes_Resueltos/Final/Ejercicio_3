@@ -1,0 +1,66 @@
+///////////main.c
+#include <stdio.h>
+
+#include "prototipo.h"
+
+int main()
+{
+  ex3();
+  return 0;
+}
+
+///////////funciones.c
+#include "prototipo.h"
+
+#include <stdio.h>
+
+jugador leer_jugador()
+{
+  jugador j;
+  printf("Nombre jugador: "); scanf("%s", j.nombre); 
+  while (getchar() != '\n');
+  printf("Puntos jugador: "); scanf("%i", &j.puntos);
+  while (getchar() != '\n'); 
+  printf("Tiempo jugador: "); scanf("%f", &j.tiempo); printf("\n");
+  while (getchar() != '\n'); 
+
+  return j;
+}
+
+void ex3()
+{
+  jugador j[5];
+  for (int i = 0; i < 5; ++i)
+  {
+    j[i] = leer_jugador();
+  }
+
+  int mejor_jugador_i = 0;
+  for (int i = 0; i < 5; ++i)
+  {
+    if (j[i].puntos > j[mejor_jugador_i].puntos)
+    {
+      mejor_jugador_i = i;
+    }
+  }
+
+  printf("Mejor jugador: %s con %i puntos y tiempo %f\n",
+         j[mejor_jugador_i].nombre,
+         j[mejor_jugador_i].puntos,
+         j[mejor_jugador_i].tiempo);
+}
+
+///////////prototipo.h
+#ifndef PROTOTIPO3_H
+#define PROTOTIPO3_H
+
+typedef struct{
+	char nombre[20];
+	int puntos;
+	float tiempo;
+} jugador;
+
+jugador leer_jugador();
+void ex3();
+
+#endif

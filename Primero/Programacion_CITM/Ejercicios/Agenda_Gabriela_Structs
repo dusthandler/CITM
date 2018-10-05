@@ -1,0 +1,68 @@
+//programa.c
+
+#include <stdio.h>
+#include <string.h>
+#include "funciones.h"
+
+
+int main()
+
+{
+	Info datos[N];
+	recogida(datos); // Aquí mandamos la struct no ponemos & porque por defecto ya lo hace 
+	muestra(datos);
+	system("pause");
+	return 0;
+}
+
+
+//funciones.c
+
+#include <stdio.h>
+#include <string.h>
+#include "funciones.h"
+
+void recogida(Info *datos)  // Cuando recibimos la struct nos llega su puntero, Info es el nombre de dato que hemos creado con tydes, es como un alias
+{
+	int i;
+	for (i = 0; i<N; i++)
+	{
+		printf("Persona %d: \n", i);
+		printf("Introduce el nombre: ");
+		gets((datos + i)->nombre); // incrementamos datos +i porque queremos cambiar la dirección de memoria
+		printf("Introduce la direccion: ");
+		gets((datos + i)->direccion);
+		printf("Introduce el telefono: ");
+		scanf_s("%d", &(datos + i)->telf);
+		while (getchar() != '\n');  // es para vaciar el buffer
+	}
+}
+
+void muestra(Info *datos)
+{
+	int i;
+	for (i = 0; i<N; i++)
+	{
+		printf("\nPersona %d:\n", i);
+		printf("Nombre: %s || Direccion: %s || Telf: %d\n", (datos + i)->nombre, (datos + i)->direccion, (datos + i)->telf);
+
+	}
+}
+
+
+//funciones.h
+
+#ifndef _FUNCIONES_H
+#define _FUNCIONES_H
+#define N 2
+typedef struct info {
+	char nombre[30];
+	char direccion[30];
+	int telf;
+}Info;
+
+void recogida(Info *datos);
+void muestra(Info *datos);
+
+
+#endif _FUNCIONES_H

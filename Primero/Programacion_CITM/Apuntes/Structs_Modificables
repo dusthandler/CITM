@@ -1,0 +1,58 @@
+//programa.c
+
+#include <stdio.h>
+#include <string.h>
+#include "funciones.h"
+
+
+
+int  main()
+{
+	Datos personal;
+	personal.salario = 4550000;
+	strcpy_s(personal.nombre, 20, "Juan Hdez.");
+	func1(personal); //Se pasa la estructura completa.
+	func2(&personal);//Se pasa un puntero a estructura.
+	func1(personal); //Se pasa la estructura completa.
+	system("pause");
+	return 0;
+}
+
+
+
+//funciones.c
+
+#include <stdio.h>
+#include <string.h>
+#include "funciones.h"
+
+void func1(Datos perso)
+{
+	printf("El nombre es %s \n", perso.nombre);
+	printf("El salario es %ld \n", perso.salario);
+	//perso es copia de la estructura original: personal.
+}
+void func2(Datos *p)
+{
+	printf("Dame el nombre para modificarlo\n");
+	gets(p->nombre);
+	printf("Dame el salario para modificarlo\n");
+	scanf_s("%ld", &p->salario);
+	//Modifica la estructura original: personal, ya que p apunta a personal.
+}
+
+
+//funciones.h
+
+#ifndef _FUNCIONES_H
+#define  _FUNCIONES_H
+
+typedef struct {
+	long salario;
+	char nombre[20];
+}Datos;
+
+void func1(Datos); //El parámetro es de tipo estructura (por valor).
+void func2(Datos *);//El parámetro es puntero a estructura (por refer.)
+
+#endif //  _FUNCIONES_H

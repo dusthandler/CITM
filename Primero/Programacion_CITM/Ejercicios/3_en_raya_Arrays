@@ -1,0 +1,429 @@
+///////////////////////////////////////////main.c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "project.h"
+
+
+int main() {
+	srand(time(NULL));
+
+	char taulell[3][3];
+
+	int m, guanyador=3; //g 0  ningu, 1 usuari, 2 maquina
+
+	char seguir;
+
+	do {
+		printf("Veamos quien empieza lanzando una moneda, la maquina juega con cruz, el usuario con cara\n");
+		printf("\n");
+
+		m = tirarMoneda();
+
+		if (m == 0) {
+			printf("Empieza el usuario\n");
+			printf("\n");
+		}
+
+		else {
+			printf("Empieza la maquina\n");
+			printf("\n");
+		}
+
+		inicializarTablero(taulell, 3, 3);
+
+		mostrarTablero(taulell, 3, 3);
+		printf("\n");
+
+
+		while (guanyador!=0 && guanyador!=1 && guanyador != 2) {
+
+			if (m == 0) {
+				tiradaUsuario(taulell, 3, 3);
+				mostrarTablero(taulell, 3, 3);
+				printf("\n");
+				m = 1;
+			}
+
+			else {
+				tiradaMaquina(taulell, 3, 3);
+				mostrarTablero(taulell, 3, 3);
+				printf("\n");
+				m = 0;
+			}
+			guanyador = comprobar(taulell, 3, 3);
+		};
+
+		printf("Quieres repetir si <s> no <n>\n");
+		scanf_s(" %c", &seguir);
+		if (seguir == 's') {
+			guanyador = 3;
+		}
+
+	} while (seguir == 's');
+
+	printf("\n");
+
+	system("pause");
+	return 0;
+} 
+
+
+////////////////////////////funciones.c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "project.h"
+
+void inicializarTablero(char taulell[][3], int fila, int columna) {
+	int i, j;
+
+	for (i = 0; i < fila; i++) {
+		for (j = 0; j < columna; j++){
+			taulell[i][j] = '-';
+		}
+	}
+}
+
+void mostrarTablero(char taulell[][3], int fila, int columna) {
+	int i, j;
+	printf("  [0][1][2]\n");
+	for (i = 0; i < fila; i++) {
+		printf("[%d]", i);
+		for (j = 0; j < columna; j++) {
+			printf (" %c", taulell[i][j]);
+			
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+int tirarMoneda() {
+	
+	return rand() % 2;
+}
+
+
+
+void tiradaMaquina(char a[][3], int fila, int columna) {
+
+	int i, j;
+	do {
+		i = rand() % 3;
+		j = rand() % 3;
+
+	
+	}while (a[i][j] != '-');
+	a[i][j] = 'x';
+}
+
+void tiradaUsuario(char a[][3], int fila, int columna) {
+
+	int i, j;
+	do {
+		printf("Dame la fila\n");
+		scanf_s("%i", &i);
+
+		printf("Dame la columna\n");
+		scanf_s("%i", &j);
+	} while (a[i][j] != '-');
+
+	a[i][j] = 'o';
+
+}
+
+int comprobar(char a[][3], int fila, int columna) {
+	if ((a[0][0] == 'x' && a[0][1] == 'x' && a[0][2] == 'x') || (a[1][0] == 'x' && a[1][1] == 'x' && a[1][2] == 'x') || (a[2][0] == 'x' && a[2][1] == 'x' && a[2][2] == 'x')) { //filas
+		printf("Gana la maquina\n");
+		printf("\n");
+		return 0;
+	}
+	else if ((a[0][0] == 'x' && a[1][0] == 'x' && a[2][0] == 'x') || (a[0][1] == 'x' && a[1][1] == 'x' && a[2][1] == 'x') || (a[0][2] == 'x' && a[1][2] == 'x' && a[2][2] == 'x')) {//columnas
+		printf("Gana la maquina\n");
+		printf("\n");
+		return 0;
+	}
+	else if ((a[0][0] == 'x' && a[1][1] == 'x' && a[2][2] == 'x') || (a[0][2] == 'x' && a[1][1] == 'x' && a[2][0] == 'x')) {
+		printf("Gana la maquina\n");
+		printf("\n");
+		return 0;
+	}
+
+	if ((a[0][0] == 'o' && a[0][1] == 'o' && a[0][2] == 'o') || (a[1][0] == 'o' && a[1][1] == 'o' && a[1][2] == 'o') || (a[2][0] == 'o' && a[2][1] == 'o' && a[2][2] == 'o')) { //filas
+		printf("Gana el usuario\n");
+		printf("\n");
+		return 1;
+	}
+	else if ((a[0][0] == 'o' && a[1][0] == 'o' && a[2][0] == 'o') || (a[0][1] == 'o' && a[1][1] == 'o' && a[2][1] == 'o') || (a[0][2] == 'o' && a[1][2] == 'o' && a[2][2] == 'o')) {//columnas
+		printf("Gana el usuario\n");
+		printf("\n");
+		return 1;
+	}
+	else if ((a[0][0] == 'o' && a[1][1] == 'o' && a[2][2] == 'o') || (a[0][2] == 'o' && a[1][1] == 'o' && a[2][0] == 'o')) {
+		printf("Gana el usuario\n");
+		printf("\n");
+		return 1;
+	}
+
+	else {
+		//mirar si taulell esta ple
+		int full = 1;
+		for (int f = 0; f < fila; f++)
+		{
+			for (int c = 0; c < columna; c++)
+			{
+				if (a[f][c] == '-')
+				{
+					full = 0;
+					break;
+				}
+			}
+			if (full == 0)
+				break;
+		}
+		if(full==1)
+			return 2; //en cas de que estigui ple, seria empat
+
+	} return 3; //en cas d'estar buit i no hi ha guanyador
+
+
+}
+
+//////////////////////////////project.h
+
+#ifndef _PROJECT_H
+#define _PROJECT_H
+
+void inicializarTablero(char[][3], int, int);
+
+int tirarMoneda();
+
+void tiradaMaquina(char[][3], int, int);
+
+void tiradaUsuario(char[][3], int, int);
+
+void mostrarTablero(char[][3], int, int);
+
+int comprobar(char[][3], int, int);
+
+
+
+#endif _PROJECT_H
+
+_______________________________________________________________________________________________________________________________________
+
+/////////////////////3 en raya 2da versión (a lo pro)////////////////////////////
+
+
+//////////////////////////main.c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "fnc.h"
+
+int main()
+{
+	srand(time(NULL));
+	char taulell[3][3];
+
+	inicialitzarTaulell(taulell, 3, 3);
+	pintarTaulell(taulell, 3, 3);
+	int torn = tirarMoneda();
+	int end = 0;
+	while (!end)
+	{
+		switch (torn)
+		{
+		case 0:
+			tiradaUsuari(taulell, 3, 3);
+			break;
+		case 1:
+			tiradaMaquina(taulell, 3, 3);
+			break;
+		}
+		torn = (torn + 1) % 2;
+		pintarTaulell(taulell, 3, 3);
+		end = comprobarTaulell(taulell, 3, 3);
+
+		switch (end)
+		{
+		case 1:
+			printf("Has guanyat!!\n");
+			break;
+		case 2:
+			printf("Ha guanyat la Maquina!!\n");
+			break;
+		case 3:
+			printf("Empat.\n");
+			break;
+		}
+	}
+
+	getchar();
+	getchar();
+	return 0;
+}
+
+
+///////////////////////////////fnc.c
+
+#include "fnc.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+void inicialitzarTaulell(char taulell[][3], int files, int columnes)
+{
+	for (int f = 0; f < files; f++)
+	{
+		for (int c = 0; c < columnes; c++)
+			taulell[f][c] = '-';
+	}
+}
+
+void pintarTaulell(char taulell[][3], int files, int columnes)
+{
+	printf("   [0][1][2]\n");
+	for (int f = 0; f < files; f++)
+	{
+		printf("[%d]", f);
+		for (int c = 0; c < columnes; c++)
+			printf(" %c ", taulell[f][c]);
+		printf("\n");
+	}
+	printf("\n");
+
+}
+
+int tirarMoneda()
+{
+	return rand()%2;
+}
+
+void tiradaUsuari(char taulell[][3], int files, int columnes)
+{
+	int x, y;
+	printf("Indica on vols tirar (fila columna): ");
+	scanf_s("%d %d", &y, &x);
+
+	while (taulell[y][x] != '-')
+	{
+		printf("Posicio invalida.\n");
+		printf("Indica on vols tirar (fila columna): ");
+		scanf_s("%d %d", &y, &x);
+	}
+	taulell[y][x] = 'O';
+}
+
+void tiradaMaquina(char taulell[][3], int files, int columnes)
+{
+	int x = rand() % 3;
+	int y = rand() % 3;
+
+
+	while (taulell[y][x] != '-')
+	{
+		x = rand() % 3;
+		y = rand() % 3;
+	}
+	taulell[y][x] = 'X';
+
+	printf("La Maquina tira a la fila %d, columna: %d\n", y, x);
+}
+
+int comprobarTaulell(char taulell[][3], int files, int columnes)
+{
+	int ret = 0;
+
+	//Check if board is full
+	int full = 1;
+	for (int f = 0; f < files; f++)
+	{
+		for (int c = 0; c < columnes; c++)
+		{
+			if (taulell[f][c] == '-')
+			{
+				full = 0;
+				break;
+			}
+		}
+		if (full == 0)
+			break;
+	}
+
+	if (full == 1)
+		ret = 3; //full board
+
+	if (ret == 0)
+	{
+		//check rows
+		char winner = '-';
+		for (int f = 0; f < files; f++)
+		{
+			if (taulell[f][0] == taulell[f][1] && taulell[f][0] == taulell[f][2] && taulell[f][1] == taulell[f][2])
+			{
+				winner = taulell[f][0];
+				break;
+			}
+		}
+		if (winner == '-') //check columns
+		{
+			for (int c = 0; c < columnes; c++)
+			{
+				if (taulell[0][c] == taulell[1][c] && taulell[0][c] == taulell[2][c] && taulell[1][c] == taulell[2][c])
+				{
+					winner = taulell[0][c];
+					break;
+				}
+			}
+		}
+
+		if (winner == '-')
+		{
+			//check diagonals
+			if (taulell[0][0] == taulell[1][1] && taulell[0][0] == taulell[2][2] && taulell[1][1] == taulell[2][2])
+			{
+				winner = taulell[0][0];
+			}
+		}
+
+		if (winner == '-')
+		{
+			//check diagonals
+			if (taulell[0][2] == taulell[1][1] && taulell[0][2] == taulell[2][0] && taulell[1][1] == taulell[2][0])
+			{
+				winner = taulell[0][2];
+			}
+		}
+
+		if (winner == 'O')
+			ret = 1; //player win
+		else if (winner == 'X')
+			ret = 2;
+	}
+
+	return ret;
+}
+
+
+///////////////////////////////////////fnc.h
+
+#ifndef __FNC_H__
+#define __FNC_H__
+
+void inicialitzarTaulell(char taulell[][3], int files, int columnes);
+
+void pintarTaulell(char taulell[][3], int files, int columnes);
+
+int tirarMoneda();
+
+void tiradaUsuari(char taulell[][3], int files, int columnes);
+void tiradaMaquina(char taulell[][3], int files, int columnes);
+
+int comprobarTaulell(char taulell[][3], int files, int columnes);
+
+
+#endif // !__FNC_H__

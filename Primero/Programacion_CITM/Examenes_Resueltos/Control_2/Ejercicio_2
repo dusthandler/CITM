@@ -1,0 +1,59 @@
+///////////////////////main.c
+
+#include <stdio.h>
+#include "prototipo.h"
+
+int main() {
+
+	int op;
+	float t;
+
+	printf("Conversor de temperatura, elige una opcion: \n");
+	printf("\n");
+	printf("De F a C<1>\nDe C a F<2>\n");
+	scanf_s("%i", &op);
+
+	switch (op) {
+	case 1:
+		printf("Dame la temperatura F\n");
+		scanf_s("%f", &t);
+		calculoc(&t);
+		break;
+	case 2:
+		printf("Dame la temperatura C\n");
+		scanf_s("%f", &t);
+		calculof(&t);
+		break;
+	default:
+		printf("Error\n");
+	}
+	system("pause");
+	return 0;
+}
+
+/////////////////funciones.c
+
+#include <stdio.h>
+#include "prototipo.h"
+
+void calculoc(float *temp) {
+	float cal;
+	cal = ((*temp) - 32) / 1.8;
+	printf("La temp en C es %0.2f\n", cal);
+}
+
+void calculof(float *temp) {
+	float cal;
+	cal = ((*temp) + 1.8) * 32;
+	printf("La temp en F es %0.2f\n", cal);
+}
+
+//////////////prototipo.h
+
+#ifndef _PROTOTIPO_H
+#define _PROTOTIPO_H
+
+void calculoc(float *);
+void calculof(float *);
+
+#endif _PROTOTIPO_H

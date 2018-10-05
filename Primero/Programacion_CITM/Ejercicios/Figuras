@@ -1,0 +1,93 @@
+#include <stdio.h>
+
+
+/*int main() {
+	int x, y, z, c, cont;
+	printf("Cuantas filas quieres?\n");
+	scanf_s("%i", &x);
+	printf("\n");
+	for (z = x; z > 0; z--) {
+		if (z == x) {
+			for (c = 0; c < x; c++) {
+				printf("*");
+			}
+		}
+		else if (z == 1) {
+			printf("*");
+		}
+		else {
+			printf("*");
+			for (c = 0; c < z - 2; c++) {
+				printf("o");
+			}
+			printf("*");
+		}
+		printf("\n");
+	}
+	printf("\n");
+	for (cont = x; cont > 0; cont--) {
+		y = x - cont;
+		for (c = 0; c < y; c++) {
+			printf(" ");
+		}
+		if (cont == x) {
+			printf("o");
+			for (c = 0; c < x - 2; c++) {
+				printf("*");
+			}
+			printf("o");
+		}
+		else if (cont == 1) {
+			printf("o");
+		}
+		else {
+			for (c = 0; c < cont; c++) {
+				printf("*");
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+	for (cont = 1; cont <= x; cont++) {
+		y = x - cont;
+		for (c = 0; c < y; c++) {
+			printf(" ");
+		}
+		for (c = 0; c < cont - 1; c++) {
+			printf("*o");
+		}
+		printf("*");
+		printf("\n");
+	}
+	printf("\n");
+
+	system("pause");
+	return 0;
+}*/
+
+int main() {
+
+	int x, c, y, cont; //x=filas, c=columnas , y=
+
+	printf("Cuantas filas quieres?\n");
+	scanf_s("%i", &x);
+	printf("\n");
+
+	for (cont = 1; cont <= x; cont++) {
+		y = x - cont;
+
+		for (c = 0; c < y; c++) {
+			printf(" ");
+		}
+
+		for (c = 0; c < cont - 1; c++) {
+			printf("**");
+		}
+		printf("*");
+		printf("\n");
+	}
+	printf("\n");
+
+	system("pause");
+	return 0;
+}

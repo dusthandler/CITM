@@ -1,0 +1,92 @@
+main.c
+
+          #include "functions.h"
+          #include <stdio.h>
+
+          int main()
+          {
+            //creat the array of "elemento"
+            elemento data[10];
+            int e = 0;
+
+            printf("Cuantos elementos quieres?\n");
+            scanf_s("%d", &e);
+
+            InicializarElementos(data, e);
+            mostrarInformacion(data, e);
+
+            system("pause");
+            return 0;
+          }
+          
+          
+functions.c
+
+          #include "functions.h"
+          #include <stdio.h>
+
+          void InicializarElementos(elemento elementos[], int num_ele)
+          {
+            for (int i = 0; i < num_ele; i++)
+            {
+              ClearBuffer();
+              printf("Elemento #%d\n", i);
+              printf("Nombre: ");
+              gets(elementos[i].nombre);
+              ClearBuffer();
+              printf("\nCodigo: ");
+              scanf_s("%d", &elementos[i].codigo);
+              ClearBuffer();
+              printf("\nCantidad: ");
+              scanf_s("%d", &elementos[i].cant);
+              printf("\n");
+            }
+          }
+
+          void mostrarInformacion(elemento elementos[], int ele) {
+            int code, cont=0;
+            printf("Dime el codigo que deseas ver\n");
+            scanf_s("%i", &code);
+
+            for (int i = 0; i < ele; i++)
+            {
+              if (elementos[i].codigo == code) {
+                printf("Definicion: Elemento #%d", i);
+                printf("      ");
+                printf("Nombre: %s", elementos[i].nombre);
+                printf("      ");
+                printf("Cantidad: %d", elementos[i].cant);
+                cont++;
+              }
+              else {
+                if (cont++ == 0) {
+                  printf("\nElemento no encntrado\n");
+                }
+              }
+              printf("\n");
+            }
+          }
+
+          void ClearBuffer(){
+            while (getchar() != '\n');
+          }
+          
+          
+functions.h  //si nos fijamos el nombre de la función es el mismo que en functions.c, me refiero a lo de void(cosas random);
+          #ifndef __FUNCTIONS_H__
+          #define __FUNCTIONS_H__
+
+          typedef struct {
+            char nombre[10];
+            int codigo;
+            int cant;
+          }elemento;
+
+          void InicializarElementos(elemento elementos[], int num_ele);
+
+          void mostrarInformacion(elemento[], int ele);
+
+
+          void ClearBuffer();
+
+          #endif // !__FUNCTIONS_H__

@@ -1,0 +1,118 @@
+       //MAIN
+       
+#include <stdio.h>
+#include <string.h>
+#include "header.h"
+
+
+int main() {
+
+	char ss = 's', ss1='s', ss2='s';
+
+	Agenda amigo[3];
+
+	recogida(amigo);
+
+	printf("Quieres mostrar la agenda?");
+	scanf_s(" %c", &ss);
+	if (ss == 's') {
+		muestra(amigo);
+	}
+	printf("Quieres modificar algun dato?");
+	scanf_s(" %c", &ss1);
+	if (ss1 == 's') {
+		modificar(amigo);
+	}
+
+	printf("Quieres mostrar la agenda?");
+	scanf_s(" %c", &ss2);
+	if (ss2 == 's') {
+		muestra(amigo);
+	}
+
+	system("pause");
+	return 0;
+}
+
+
+      //FUNCIONES
+
+#include <stdio.h>
+#include <string.h>
+#include "header.h"
+
+
+void recogida(Agenda *amigo) {
+
+	for (int i = 0; i < 3; i++) {
+		printf("Introduce el nombre: ");
+		gets((amigo + i)->nombre);
+		printf("Introduce el apellido: ");
+		gets((amigo + i)->apellido);
+		printf("Introduce el telefono: ");
+		gets((amigo + i)->telefono);
+		printf("Dame la edad: ");
+		gets((amigo + i)->edad);
+		while (getchar() != '\n');
+	}
+}
+
+void muestra(Agenda *amigo) {
+
+	for (int i = 0; i < 3; i++) {
+		printf("Nombre: %s || Apellido: %s || Telf: %s || Edad: %s \n", (amigo + i)->nombre, (amigo + i)->apellido, (amigo + i)->telefono, (amigo + i)->edad);
+		printf("\n");
+	}
+}
+
+void modificar(Agenda *amigo) {
+
+	int o, a;
+	
+		printf("Introduce el amigo que quieres modificar: \t");
+		scanf_s("%i", &a);
+		a--;
+		printf("Introduce el dato que quieres actualizar (nombre(1), apellido(2), telefono(3), edad(4): \t");
+		scanf_s(" %i", &o);
+
+		switch (o) {
+		case 1:
+			printf("Introduce el nuevo nombre : \t");
+			gets(amigo[a].nombre);
+			break;
+		case 2:
+			printf("Introduce el nuevo apellido : \t");
+			gets(amigo[a].apellido);
+			break;
+		case 3:
+			printf("Introduce el nuevo telefono : \t");
+			gets(amigo[a].telefono);
+			break;
+		case 4:
+			printf("Introduce la nueva edad : \t");
+			gets(amigo[a].edad);
+			break;
+		
+	default: printf("Elige una opcion correcta. 1.Nombre, 2.Apellido, 3.Telefono 4.Edad");
+	}
+}
+
+
+ //HEADER
+
+#ifndef HEADER_H
+#define HEDAER_H
+
+typedef struct {
+	char nombre[30];
+	char apellido[30];
+	char telefono[30];
+	char edad[2];
+}Agenda;
+
+
+void recogida(Agenda *amigo);
+void muestra(Agenda *amigo);
+void modificar(Agenda *amigo);
+
+#endif

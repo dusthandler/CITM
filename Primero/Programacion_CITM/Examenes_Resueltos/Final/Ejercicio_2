@@ -1,0 +1,41 @@
+////////////main.c
+#include <stdio.h>
+
+#include "prototipo.h"
+
+#include "prototipo.h"
+
+int main()
+{
+  ex2();
+  return 0;
+}
+
+////////////funciones.c
+#include "prototipo.h"
+
+#include <stdio.h>
+
+void magic(int *n)
+{
+  int x = *n;
+  printf("\n%c, %c, %c, %c, %c\n", (char)(x), (char)(x+1), (char)(x+2), (char)(x+3), (char)(x+4));
+}
+
+void ex2()
+{
+  int x = 0;
+  printf("Dime un numero entre 65 y 85: ");
+  scanf("%i", &x);
+
+  magic(&x);
+}
+
+////////////prototipo.h
+#ifndef PROTOTIPO2_H
+#define PROTOTIPO2_H
+
+void magic(int *n);
+void ex2();
+
+#endif
