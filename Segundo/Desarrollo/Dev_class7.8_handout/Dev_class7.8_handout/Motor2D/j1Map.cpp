@@ -51,6 +51,8 @@ void j1Map::Path(int x, int y)
 
 	// TODO 2: Follow the breadcrumps to goal back to the origin
 	// add each step into "path" dyn array (it will then draw automatically)
+	visited.find(goal);
+
 	while (path.Count != Start) {
 		path.Count = breadcrumbs.count();
 		breadcrumbs.del(breadcrumbs.count);
