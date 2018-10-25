@@ -51,11 +51,19 @@ void j1Map::Path(int x, int y)
 
 	// TODO 2: Follow the breadcrumps to goal back to the origin
 	// add each step into "path" dyn array (it will then draw automatically)
-	visited.find(goal);
+	int indexGoal = visited.find(goal);
 
-	while (path.Count != Start) {
-		path.Count = breadcrumbs.count();
-		breadcrumbs.del(breadcrumbs.count);
+	if (indexGoal != -1) {
+
+		iPoint currentPoint = breadcrumbs.At(indexGoal)->data;
+
+		while (currentPoint != visited.start->data) {
+
+			path.PushBack(currentPoint);
+			indexGoal = visited.find(currentPoint);
+			currentPoint = breadcrumbs.At(indexGoal)->data;
+
+		}
 	}
 }
 
@@ -64,6 +72,30 @@ void j1Map::PropagateDijkstra()
 	// TODO 3: Taking BFS as a reference, implement the Dijkstra algorithm
 	// use the 2 dimensional array "cost_so_far" to track the accumulated costs
 	// on each cell (is already reset to 0 automatically)
+	iPoint curr;
+	if (frontier.Pop(curr))
+	{
+		//TODO: Recorrer los frontier valorando la prioridad y hacer todo este proceso con el de prioridad más alta. 
+		iPoint neighbors[4];
+		neighbors[0].create(curr.x + 1, curr.y + 0);
+		neighbors[1].create(curr.x + 0, curr.y + 1);
+		neighbors[2].create(curr.x - 1, curr.y + 0);
+		neighbors[3].create(curr.x + 0, curr.y - 1);
+
+		for (uint i = 0; i < 4; ++i)
+		{
+			if (MovementCost(neighbors[i].x, neighbors[i].y) > -1)
+			{
+				if (visited.find(neighbors[i]) == -1)
+				{
+					frontier.Push(neighbors[i], MovementCost(neighbors[i].x, neighbors[i].y));
+					visited.add(neighbors[i]);
+					breadcrumbs.add(curr);
+				}
+			}
+		}
+
+	}
 }
 
 int j1Map::MovementCost(int x, int y) const
@@ -96,7 +128,7 @@ void j1Map::PropagateBFS()
 		neighbors[2].create(curr.x - 1, curr.y + 0);
 		neighbors[3].create(curr.x + 0, curr.y - 1);
 
-		for (uint i = 0; i < 4; ++i)
+  		for (uint i = 0; i < 4; ++i)
 		{
 			if (MovementCost(neighbors[i].x, neighbors[i].y) > 0)
 			{
@@ -108,6 +140,7 @@ void j1Map::PropagateBFS()
 				}
 			}
 		}
+
 	}
 }
 
