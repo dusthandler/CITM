@@ -75,7 +75,7 @@ void j1Map::PropagateDijkstra()
 	iPoint curr;
 	if (frontier.Pop(curr))
 	{
-		//TODO: Recorrer los frontier valorando la prioridad y hacer todo este proceso con el de prioridad más alta. 
+		//falta recorrer los frontier valorando la prioridad y hacer todo este proceso con el de prioridad más alta. 
 		iPoint neighbors[4];
 		neighbors[0].create(curr.x + 1, curr.y + 0);
 		neighbors[1].create(curr.x + 0, curr.y + 1);
