@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<game_state>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<map />
+	<scene />
+	<player position_x="2062" position_y="246" level="2" />
+	<:anonymous />
+	<renderer>
+		<camera x="-3136" y="0" />
+	</renderer>
+</game_state>
